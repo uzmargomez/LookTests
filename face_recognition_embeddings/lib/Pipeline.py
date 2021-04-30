@@ -29,7 +29,7 @@ class DataSet:
 		self.slope_limit = slope_limit
 		self.intercept_limit = intercept_limit
 
-		aux = glob.glob( directory + "/Train/*" )
+		aux = sorted(glob.glob( directory + "/Train/*" ))
 		for d in aux:
 			d=d.replace("\\","/")
 			images = glob.glob(d + "/*." + extension)
@@ -43,19 +43,19 @@ class DataSet:
 			self.index_to_subject[i]=subject
 			self.subject_to_index[subject]=i
 
-		aux = glob.glob( directory + "/Test/*" )
+		aux = sorted(glob.glob( directory + "/Test/*" ))
 		for d in aux:
 			d=d.replace("\\","/")
 			images = glob.glob(d + "/*." + extension)
 			self.test_images_known[d.split("/")[-1]]=images
 
-		aux = glob.glob( directory + "/Unknown/*" )
+		aux = sorted(glob.glob( directory + "/Unknown/*" ))
 		for d in aux:
 			d=d.replace("\\","/")
 			images = glob.glob(d + "/*." + extension)
 			self.test_images_unknown[d.split("/")[-1]]=images
 
-		aux = glob.glob( directory + "/Group" )
+		aux = sorted(glob.glob( directory + "/Group" ))
 		for d in aux:
 			d=d.replace("\\","/")
 			images = glob.glob(d+ "/*." + extension)

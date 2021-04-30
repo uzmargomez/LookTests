@@ -13,12 +13,10 @@ ds = DataSet(
     intercept_limit=.164
 )
 
-ds.load_model(name='model',train=False)
-
+ds.load_model(name='model_v1',train=False)
 
 class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
-
         img = frame.to_ndarray(format="bgr24")
 
         img = ds.modify_image(img)

@@ -32,9 +32,9 @@ def main():
 		slope_limit=args.slope_limit,
 		intercept_limit=args.intercept_limit
     )
-	
+
 	ds.print_dataset_info()
-	ds.load_model(name='model',train=False)
+	ds.load_model(name='model_v1',train=False)
 	
 	#filename='datasets/LookDataSet/Test/Emma_Watson/Emma_Watson_018_resized.jpg'
 	#ds.single_image(filename=filename)
