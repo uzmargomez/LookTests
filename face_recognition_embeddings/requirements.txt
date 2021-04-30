@@ -1,6 +1,6 @@
 keras-facenet
 mtcnn
-opencv-python
+opencv-python-headless
 scikit-learn
 matplotlib
 tensorflow
