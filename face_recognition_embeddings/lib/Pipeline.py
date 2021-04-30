@@ -254,45 +254,51 @@ class DataSet:
 		im = extract_face(filename,self.size)
 		print("Image was classified as",self.classify_image(im))
 
+	def modify_image(self, frame):
+
+		color = (246, 181, 100)
+
+		img = frame
+
+		preview = img
+
+		detections = detector.detect_faces(img)
+
+		if not detections:
+			return preview
+		for detection in detections:
+			box = detection['box']
+
+			face = img[abs(box[1]):abs(box[1])+abs(box[3]), abs(box[0]):abs(box[0])+abs(box[2])]
+
+			if self.size == -1:
+				face_array = face
+			else:
+				face_array = cv2.resize(face,(self.size,self.size),interpolation=cv2.INTER_NEAREST)
+
+			identity = self.classify_image(face_array)
+
+			if identity is not None:
+
+				cv2.rectangle(preview,(abs(box[0]), abs(box[1])), (abs(box[0])+abs(box[2]), abs(box[1])+abs(box[3])),color, 1)
+
+				cv2.putText(preview, identity, (abs(box[0]), abs(box[1])-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 1,cv2.LINE_AA)
+
+				print(identity)
+
+		return preview
+
 	def testing_webcam(self, video_path = 0):
 
 		print("TESTING WEBCAM")
 
 		cap = cv2.VideoCapture(video_path)
 
-		color = (246, 181, 100)
-
 		while True:
 			ok, frame = cap.read()
 			if ok:
 
-				img = frame
-
-				preview = img.copy()
-
-				detections = detector.detect_faces(img)
-
-				if not detections:
-					continue
-				for detection in detections:
-					box = detection['box']
-
-					face = img[abs(box[1]):abs(box[1])+abs(box[3]), abs(box[0]):abs(box[0])+abs(box[2])]
-
-					if self.size == -1:
-						face_array = face
-					else:
-						face_array = cv2.resize(face,(self.size,self.size),interpolation=cv2.INTER_NEAREST)
-
-					identity = self.classify_image(face_array)
-
-					if identity is not None:
-
-						cv2.rectangle(preview,(abs(box[0]), abs(box[1])), (abs(box[0])+abs(box[2]), abs(box[1])+abs(box[3])),color, 1)
-
-						cv2.putText(preview, identity, (abs(box[0]), abs(box[1])-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 1,cv2.LINE_AA)
-
-						print(identity)
+				preview = self.modify_image(frame)
 
 			cv2.imshow("preview", preview)
 

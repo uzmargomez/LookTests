@@ -20,7 +20,7 @@ def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--directory",			"-dir",	help="Dataset directory",			type=str,	default="datasets/LookDataSet")
 	parser.add_argument("--extension",			"-ext",	help="Dataset images extension",	type=str,	default="jpg")
-	parser.add_argument("--size",				"-si",	help="Image size",					type=int,	default=24)
+	parser.add_argument("--size",				"-si",	help="Image size",					type=int,	default=40)
 	parser.add_argument("--slope_limit",		"-sl",	help="Slope Limit",					type=float, default=.5)
 	parser.add_argument("--intercept_limit",	"-il",	help="Intercept Limit",				type=float,	default=.164)
 	args = parser.parse_args()
