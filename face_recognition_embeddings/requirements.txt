@@ -3,7 +3,6 @@ mtcnn
 opencv-python-headless
 scikit-learn
 matplotlib
-tensorflow
 streamlit
 streamlit-webrtc
 pyarrow

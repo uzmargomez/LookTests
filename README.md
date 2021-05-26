@@ -6,16 +6,19 @@ This is a full face detection and recognition system. For the detection part [MT
 ## Getting Started
 
 ### Embeddings
-1.	Installation process
-    
-    You can simply clone this repository. After that, you need to unzip the example dataset contained in face_recognition_embeddings/datasets.
 
-2.	Software dependencies
-    
-    You can see the necessary pip packages on the file face_recognition_embeddings/requirements.txt. Also, install cmake on your system, in order to install it on a debian-based distribution run
-    
-        sudo apt-get install -y cmake
+1. Clone this repository. After that, you need to unzip the example dataset contained in face_recognition_embeddings/datasets.
 
-3.  Inside face_recognition_embeddings directory, run the command
+2. With Docker installed, run the following command inside the "face_recognition_embeddings" directory
 
-        python3 main.py
+    ```
+    docker build -t look_test:v1 .
+    ```
+
+3. After the image is created, run the following command
+
+    ```
+    docker run --gpus all -p 8501:8501 look_test:v1
+    ```
+
+4. Open the app in [http://localhost:8501/](http://localhost:8501/)
